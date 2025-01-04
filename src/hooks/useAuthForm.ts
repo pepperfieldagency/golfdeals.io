@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
   signInWithPopup,
-  updateProfile 
+  updateProfile
 } from 'firebase/auth';
 
 interface AuthFormState {
@@ -25,6 +25,7 @@ export function useAuthForm(isLogin: boolean) {
 
   const handleAuth = async (email: string, password: string, name?: string) => {
     setState({ loading: true, error: null });
+    
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(auth, email, password);
@@ -34,11 +35,35 @@ export function useAuthForm(isLogin: boolean) {
           await updateProfile(user, { displayName: name });
         }
       }
-      navigate('/deals');
+      navigate('/deals', { replace: true });
     } catch (error: any) {
+      let errorMessage = 'An error occurred. Please try again.';
+      
+      // Handle specific Firebase auth errors
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address.';
+          break;
+        case 'auth/user-disabled':
+          errorMessage = 'This account has been disabled.';
+          break;
+        case 'auth/user-not-found':
+          errorMessage = 'No account found with this email.';
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Incorrect password.';
+          break;
+        case 'auth/email-already-in-use':
+          errorMessage = 'An account already exists with this email.';
+          break;
+        case 'auth/weak-password':
+          errorMessage = 'Password should be at least 6 characters.';
+          break;
+      }
+
       setState({
         loading: false,
-        error: error.message
+        error: errorMessage
       });
     }
   };
@@ -47,11 +72,11 @@ export function useAuthForm(isLogin: boolean) {
     setState({ loading: true, error: null });
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate('/deals');
+      navigate('/deals', { replace: true });
     } catch (error: any) {
       setState({
         loading: false,
-        error: error.message
+        error: 'Failed to sign in with Google. Please try again.'
       });
     }
   };
