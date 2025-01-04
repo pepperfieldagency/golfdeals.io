@@ -12,6 +12,8 @@ import AboutPage from './pages/AboutPage';
 import TermsPage from './pages/TermsPage';
 import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
+import PrivacyPage from './pages/PrivacyPage';
+import VerifyEmailPage from './pages/VerifyEmailPage';
 
 export default function App() {
   return (
@@ -25,8 +27,10 @@ export default function App() {
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/terms" element={<TermsPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/faq" element={<FaqPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/verify-email" element={<VerifyEmailPage />} />
               <Route 
                 path="/deals" 
                 element={
