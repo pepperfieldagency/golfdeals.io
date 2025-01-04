@@ -24,59 +24,69 @@ export default function FeaturedDealCard({ deal }: FeaturedDealCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full">
-      <div className="relative aspect-[16/9] sm:aspect-[2/1] md:aspect-[16/9]">
+    <div className="group relative bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+      {/* Image Container */}
+      <div className="relative aspect-[16/9]">
         <img
           src={deal.image}
           alt={deal.title}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        
+        {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-wrap items-center gap-2">
-          <span className="bg-emerald-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+          <span className="bg-yellow-400 text-yellow-900 px-3 py-1.5 rounded-full text-sm font-medium shadow-lg">
             Featured Deal
           </span>
-          <span className="bg-red-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+          <span className="bg-red-500 text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg">
             {discount}% OFF
           </span>
         </div>
       </div>
-      
+
+      {/* Content */}
       <div className="p-4 sm:p-6">
-        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{deal.title}</h3>
-        <p className="text-gray-600 text-sm sm:text-base mb-4 line-clamp-2">{deal.description}</p>
-        
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-gray-400" />
-              <span className="text-sm text-gray-600">{deal.brand}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Tag className="h-4 w-4 text-gray-400" />
-              <span className="text-sm text-gray-600">{deal.category}</span>
-            </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{deal.title}</h3>
+          <p className="text-gray-600 line-clamp-2">{deal.description}</p>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600">
+          <div className="flex items-center gap-2">
+            <Building2 className="h-4 w-4 text-gray-400" />
+            <span>{deal.brand}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Tag className="h-4 w-4 text-gray-400" />
+            <span>{deal.category}</span>
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 text-gray-400" />
-            <span className="text-sm text-gray-600">Added {dateAdded}</span>
+            <span>Added {dateAdded}</span>
           </div>
         </div>
-        
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <span className="text-xl sm:text-2xl text-red-600 line-through">${deal.originalPrice}</span>
-            <span className="text-xl sm:text-2xl font-bold text-emerald-600">${deal.discountedPrice}</span>
+
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-0 sm:justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-lg text-red-600 line-through">${deal.originalPrice}</span>
+            <span className="text-3xl font-bold text-emerald-600">${deal.discountedPrice}</span>
           </div>
+          
           <button
             onClick={handleViewDeal}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium 
+              transform transition-all duration-200
+              hover:bg-emerald-700 hover:shadow-lg hover:-translate-y-0.5
+              active:translate-y-0 active:shadow-md"
           >
-            <span>View Deal</span>
+            <span>{user ? 'Buy Now' : 'Sign In to Buy'}</span>
             <ExternalLink className="h-4 w-4" />
           </button>
         </div>
       </div>
+
+      {/* Hover Overlay */}
+      <div className="absolute inset-0 bg-emerald-600/0 transition-colors duration-300 group-hover:bg-emerald-600/5" />
     </div>
   );
 }
