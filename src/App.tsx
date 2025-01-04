@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import Footer from './components/footer/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -10,10 +9,11 @@ import DealsPage from './pages/DealsPage';
 import ArchivedDealsPage from './pages/ArchivedDealsPage';
 import AboutPage from './pages/AboutPage';
 import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
-import PrivacyPage from './pages/PrivacyPage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -47,9 +47,9 @@ export default function App() {
                   </ProtectedRoute>
                 } 
               />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
-          <Footer />
         </div>
       </AuthProvider>
     </Router>
