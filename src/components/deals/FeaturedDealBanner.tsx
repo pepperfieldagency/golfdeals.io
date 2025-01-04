@@ -13,7 +13,7 @@ export default function FeaturedDealBanner({ deal, onClick }: FeaturedDealBanner
   return (
     <div className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl shadow-xl mb-8">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,255,255,0.2)_1px,_transparent_1px)] [background-size:20px_20px]" />
       </div>
 
