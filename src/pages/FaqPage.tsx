@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/footer/Footer';
 import FaqSection from '../components/faq/FaqSection';
 import NewsletterSubscription from '../components/NewsletterSubscription';
 import { useScrollToTop } from '../hooks/useScrollToTop';
@@ -8,9 +9,9 @@ export default function FaqPage() {
   useScrollToTop();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      <main>
+      <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -24,6 +25,7 @@ export default function FaqPage() {
         </div>
         <NewsletterSubscription />
       </main>
+      <Footer />
     </div>
   );
 }

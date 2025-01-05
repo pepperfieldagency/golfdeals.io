@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
 import Header from '../components/Header';
+import Footer from '../components/footer/Footer';
 import FeaturedDealSection from '../components/home/FeaturedDealSection';
 import HowItWorks from '../components/HowItWorks';
 import SavingsStats from '../components/SavingsStats';
@@ -17,14 +18,14 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Helmet>
         <title>Golf Deals & Discounts | Save Up to 70% on Golf Equipment | golfdeals.io</title>
         <meta name="description" content="Find the best golf deals and discounts on premium equipment, apparel, and accessories. Save up to 70% on top golf brands. Join 50,000+ golfers who save big with golfdeals.io" />
       </Helmet>
 
       <Header />
-      <main>
+      <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-8">
           <div className="text-center mb-8">
             <h1 className="headline mb-4">
@@ -41,6 +42,7 @@ export default function HomePage() {
         <TestimonialsSection />
         <NewsletterSubscription />
       </main>
+      <Footer />
     </div>
   );
 }
