@@ -14,23 +14,23 @@ export default function FeaturedDealCard({ deal }: FeaturedDealCardProps) {
   const discount = Math.round(((deal.originalPrice - deal.discountedPrice) / deal.originalPrice) * 100);
   const dateAdded = new Date(deal.dateAdded).toLocaleDateString();
 
-  const handleViewDeal = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!user) {
-      navigate('/login');
-    } else {
+    if (user) {
       window.open(deal.url, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate('/login');
     }
   };
 
   return (
-    <div className="group relative bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+    <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
       {/* Image Container */}
       <div className="relative aspect-[16/9]">
         <img
           src={deal.image}
           alt={deal.title}
-          className="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-110"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
         
         {/* Badges */}
@@ -73,20 +73,15 @@ export default function FeaturedDealCard({ deal }: FeaturedDealCardProps) {
           </div>
           
           <button
-            onClick={handleViewDeal}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium 
-              transform transition-all duration-200
-              hover:bg-emerald-700 hover:shadow-lg hover:-translate-y-0.5
-              active:translate-y-0 active:shadow-md"
+            onClick={handleClick}
+            type="button"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium"
           >
             <span>{user ? 'Buy Now' : 'Sign In to Buy'}</span>
             <ExternalLink className="h-4 w-4" />
           </button>
         </div>
       </div>
-
-      {/* Hover Overlay */}
-      <div className="absolute inset-0 bg-emerald-600/0 transition-colors duration-300 group-hover:bg-emerald-600/5" />
     </div>
   );
 }
